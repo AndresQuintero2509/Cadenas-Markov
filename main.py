@@ -1,4 +1,5 @@
 import numpy as np
+from time import  sleep
 
 print(f'** - Trabajo - Investigación de operaciones - **')
 print("________________________________________________")
@@ -12,7 +13,7 @@ for i in range(3):
     for j in range(3):
         B[i][j] = round((1/np.sum(A[i]))*A[i][j],5)
 
-print(f'1.\nLa matriz de probabilidad es: \n{B}')
+print(f'1. Matriz de probabilidad: \n{B}')
 
 #Vector Auxiliar que contiene valores del 0 al 10
 ph = np.random.randint(0, 10, size=(1,3))
@@ -28,3 +29,23 @@ for item in ph:
 
 print(f'\nEl vector aleatorio de probabilidad es: \n{p0}')
 print("________________________________________________")
+
+print(f'3. Creación de la cadena de Markov\n')
+while True:
+    j = j + 1
+    #pk = p0*B**j
+    pk = np.dot(p0, B**j)
+    #pk1 = p0*B**(j+1)
+    pk1 = np.dot(p0, B**(j+1))
+    if np.linalg.norm(pk-pk1) < 10e-8:
+        break
+print(f'Iteración terminada en {j}')
+print(f'Norma de los vectores: {np.linalg.norm(pk-pk1)}')
+print(f'Vector PK  {pk}')
+print(f'Vector Pk1 {pk1}')
+print("________________________________________________")
+
+print(f'4. Calculando eig\n')
+print(f'k = {j}')
+w, v = np.linalg.eig(B)
+print(f'Vector propio \n{np.round_(w, decimals=5)}')
