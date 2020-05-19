@@ -33,9 +33,7 @@ print("________________________________________________")
 print(f'3. Creación de la cadena de Markov\n')
 while True:
     j = j + 1
-    #pk = p0*B**j
     pk = np.dot(p0, B**j)
-    #pk1 = p0*B**(j+1)
     pk1 = np.dot(p0, B**(j+1))
     if np.linalg.norm(pk-pk1) < 10e-8:
         break
@@ -47,5 +45,6 @@ print("________________________________________________")
 
 print(f'4. Calculando eig\n')
 print(f'k = {j}')
+#Tupla que contiene eigenvalues y eigenvectors 
 w, v = np.linalg.eig(B)
-print(f'Vector propio \n{np.round_(w, decimals=5)}')
+print(f'Valor propio \n{np.round_(w, decimals=5)}')
